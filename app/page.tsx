@@ -81,38 +81,46 @@ export default function LandingPage() {
         <div className="video-col">
           <video
             src="https://imgur.com/HZYtZAa.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            preload="auto"
             className="lux-video"
+            onLoadedData={(e) => e.target.play()}
           />
           <video
             src="https://imgur.com/YEBznO4.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            preload="auto"
             className="lux-video"
+            onLoadedData={(e) => e.target.play()}
           />
         </div>
 
         <div className="video-col">
           <video
             src="https://imgur.com/AFO5yGL.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            preload="auto"
             className="lux-video"
+            onLoadedData={(e) => e.target.play()}
           />
           <video
             src="https://imgur.com/ZcdB8hl.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            preload="auto"
             className="lux-video"
+            onLoadedData={(e) => e.target.play()}
           />
         </div>
       </div>
