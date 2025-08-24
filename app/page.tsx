@@ -1,8 +1,23 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 export default function LandingPage() {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    // Force play all videos once component mounts
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = true;
+        video.play().catch(console.error);
+      }
+    });
+  }, []);
+
+  const handleVideoRef = (index: number) => (el: HTMLVideoElement | null) => {
+    videoRefs.current[index] = el;
+  };
 
   const handleCTA = () => {
     if (overlayRef.current) {
@@ -67,7 +82,7 @@ export default function LandingPage() {
         }}
       >
         <img
-          src="/pictures/logo.png"
+          src="/pictures/logo.jpg"
           alt="Luyoo Logo"
           style={{
             width: 180,
@@ -80,47 +95,47 @@ export default function LandingPage() {
       <div className="video-grid">
         <div className="video-col">
           <video
+            ref={handleVideoRef(0)}
             src="https://imgur.com/HZYtZAa.mp4"
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
+            autoPlay
+            loop
+            muted
+            playsInline
             preload="auto"
             className="lux-video"
-            onLoadedData={(e) => e.target.play()}
           />
           <video
+            ref={handleVideoRef(1)}
             src="https://imgur.com/YEBznO4.mp4"
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
+            autoPlay
+            loop
+            muted
+            playsInline
             preload="auto"
             className="lux-video"
-            onLoadedData={(e) => e.target.play()}
           />
         </div>
 
         <div className="video-col">
           <video
+            ref={handleVideoRef(2)}
             src="https://imgur.com/AFO5yGL.mp4"
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
+            autoPlay
+            loop
+            muted
+            playsInline
             preload="auto"
             className="lux-video"
-            onLoadedData={(e) => e.target.play()}
           />
           <video
+            ref={handleVideoRef(3)}
             src="https://imgur.com/ZcdB8hl.mp4"
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
+            autoPlay
+            loop
+            muted
+            playsInline
             preload="auto"
             className="lux-video"
-            onLoadedData={(e) => e.target.play()}
           />
         </div>
       </div>
