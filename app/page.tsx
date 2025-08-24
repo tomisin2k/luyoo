@@ -79,7 +79,7 @@ export default function LandingPage() {
           }}
         >
           <video
-            src="/videos/vid1.mp4"
+            src="https://imgur.com/HZYtZAa"
             autoPlay
             loop
             muted
@@ -93,7 +93,7 @@ export default function LandingPage() {
             }}
           />
           <video
-            src="/videos/vid2.mp4"
+            src="https://imgur.com/YEBznO4"
             autoPlay
             loop
             muted
@@ -119,7 +119,7 @@ export default function LandingPage() {
           }}
         >
           <video
-            src="/videos/vid3.mp4"
+            src="https://imgur.com/AFO5yGL"
             autoPlay
             loop
             muted
@@ -133,7 +133,7 @@ export default function LandingPage() {
             }}
           />
           <video
-            src="/videos/vid4.mp4"
+            src="https://imgur.com/ZcdB8hl.mp4"
             autoPlay
             loop
             muted
