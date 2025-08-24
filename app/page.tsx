@@ -6,17 +6,60 @@ export default function LandingPage() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    // Force play all videos once component mounts
-    videoRefs.current.forEach((video) => {
-      if (video) {
+    // Function to attempt video playback
+    const playVideo = async (video: HTMLVideoElement) => {
+      try {
         video.muted = true;
-        video.play().catch(console.error);
+        video.currentTime = 0;
+        await video.load();
+        await video.play();
+        console.log('Video started playing');
+      } catch (error) {
+        console.error('Video play failed:', error);
+        // Retry after a short delay
+        setTimeout(() => {
+          video.play().catch(() => {
+            console.log('Retry failed for video');
+          });
+        }, 1000);
       }
-    });
+    };
+
+    // Try to play all videos
+    const playAllVideos = () => {
+      videoRefs.current.forEach((video, index) => {
+        if (video) {
+          console.log(`Attempting to play video ${index}`);
+          playVideo(video);
+        }
+      });
+    };
+
+    // Initial attempt
+    playAllVideos();
+
+    // Also try on first user interaction
+    const handleFirstInteraction = () => {
+      playAllVideos();
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+    };
+
+    document.addEventListener('click', handleFirstInteraction);
+    document.addEventListener('touchstart', handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+    };
   }, []);
 
   const handleVideoRef = (index: number) => (el: HTMLVideoElement | null) => {
     videoRefs.current[index] = el;
+    if (el) {
+      el.addEventListener('loadeddata', () => handleVideoLoad(el));
+      el.addEventListener('canplay', () => handleVideoLoad(el));
+    }
   };
 
   const handleCTA = () => {
